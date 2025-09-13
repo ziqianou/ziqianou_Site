@@ -1863,10 +1863,10 @@ parcelRequire = (function (e, r, t, n) {
       function (require, module, exports) {
         (Object.prototype.document = window.document),
           (Object.prototype.location = window.location);
-        var t = require("zepto").$;
+        var zepto = require("zepto").$;
 
-        function e() {
-          var e = [
+        function change_slogan() {
+          var slogans = [
               "我这人吧，特别有耐心，等公交的时候都能睡着。",
               "我最近在研究历史，研究怎么把古代人变成现代人，结果研究出了一个会用手机的古人",
               "我最近在学画画，画了个自画像，结果画得特别像我弟弟",
@@ -1908,14 +1908,14 @@ parcelRequire = (function (e, r, t, n) {
               "世上🈚难事只要肯放弃🐾",
               "🤙🏻👣努力扩大舒适圈⭕",
             ],
-            i = o(0, e.length - 1);
-          t("#slogan").html(e[i]);
+            index = get_random_index_from_start_end(0, slogans.length - 1);
+          zepto("#slogan").html(slogans[index]);
         }
 
-        function o(t, e) {
-          var o = e - t,
-            i = Math.random();
-          return t + Math.round(i * o);
+        function get_random_index_from_start_end(start, end) {
+          var offset = end - start,
+            random_num = Math.random();
+          return start + Math.round(random_num * offset);
         }
         delete Object.prototype.document,
           delete Object.prototype.location,
@@ -1928,7 +1928,7 @@ parcelRequire = (function (e, r, t, n) {
             function (t) {
               window.setTimeout(t, 1e3 / 60);
             }),
-          t(function () {
+          zepto(function () {
             var t,
               e,
               o = document.createElement("canvas"),
@@ -2007,12 +2007,12 @@ parcelRequire = (function (e, r, t, n) {
               });
           }),
           (window.onscroll = function () {
-            t(window).scrollTop() > 0.6 * t(window).height()
-              ? t(".background").addClass("fixed")
-              : t(".background").removeClass("fixed");
+            zepto(window).scrollTop() > 0.6 * zepto(window).height()
+              ? zepto(".background").addClass("fixed")
+              : zepto(".background").removeClass("fixed");
           }),
-          t(function () {
-            e(),
+          zepto(function () {
+            change_slogan(),
               console.log(
                 "原作Nekotora's Flag.Moe Homepage",
                 "修改by yzxll 2025.7.31",
