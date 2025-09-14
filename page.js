@@ -1867,20 +1867,20 @@ parcelRequire = (function (e, r, t, n) {
 
         function change_slogan() {
           const Http = new XMLHttpRequest();
-          const url = 'https://v1.hitokoto.cn/?c=i&encode=json';
+          const url = "https://v1.hitokoto.cn/?c=i&encode=json";
           Http.open("GET", url, false);
           Http.send();
           if (Http.status != 200) {
-            console.error("一言获取错误："+Http.status);
-            zepto("#slogan").html("一言获取错误："+Http.status);
-            return
+            console.error("一言获取错误：" + Http.status);
+            zepto("#slogan").html("一言获取错误：" + Http.status);
+            return;
           }
           var json = JSON.parse(Http.responseText);
-          console.log("一言获取成功：" + Http.responseText)
+          console.log("一言获取成功：" + Http.responseText);
           if (!json.hitokoto) {
             console.error("一言获取错误：返回数据错误");
             zepto("#slogan").html("一言获取错误：返回数据错误");
-            return
+            return;
           }
           slogan = json.hitokoto;
           if (json.from) {
@@ -2038,9 +2038,9 @@ parcelRequire = (function (e, r, t, n) {
           zepto(function () {
             change_slogan(),
               console.log(
-                "原作Nekotora's Flag.Moe Homepage",
-                "修改by yzxll 2025.7.31",
-				"二改 by YFY0109 2025.9.14"
+                "原作 Nekotora's Flag.Moe Homepage",
+                "修改 by yzxll 2025.7.31",
+                "二改 by YFY0109 2025.9.14"
               );
           });
       },
