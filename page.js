@@ -2040,7 +2040,7 @@ parcelRequire = (function (e, r, t, n) {
               console.log(
                 "原作 Nekotora's Flag.Moe Homepage",
                 "修改 by yzxll 2025.7.31",
-                "二改 by YFY0109 2025.9.14"
+                "二改 by ziqianou 2025.9.14"
               );
           });
       },
