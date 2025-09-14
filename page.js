@@ -1877,7 +1877,19 @@ parcelRequire = (function (e, r, t, n) {
           }
           var json = JSON.parse(Http.responseText);
           console.log("一言获取成功：" + Http.responseText)
-          zepto("#slogan").html(json.hitokoto + "《" + json.from + "》" + json.from_who);
+          if (!json.hitokoto) {
+            console.error("一言获取错误：返回数据错误");
+            zepto("#slogan").html("一言获取错误：返回数据错误");
+            return
+          }
+          slogan = json.hitokoto;
+          if (json.from) {
+            slogan += "《" + json.from + "》";
+            if (json.from_who) {
+              slogan += json.from_who;
+            }
+          }
+          zepto("#slogan").html(slogan);
           // var slogans = [
           //     "我这人吧，特别有耐心，等公交的时候都能睡着。",
           //     "我最近在研究历史，研究怎么把古代人变成现代人，结果研究出了一个会用手机的古人",
