@@ -404,6 +404,13 @@ ul.skill li .progress div {
   display: inline-block;
   width: 100px;
 }
+.find .links .item span .hover-text {
+  display: none;
+}
+.find .links .item:hover span .hover-text,
+.find .links .item:focus-within span .hover-text {
+  display: inline;
+}
 .find .links .col-3 .item {
   width: 30.93%;
   margin: 10px 1.2%;
