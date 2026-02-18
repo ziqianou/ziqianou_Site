@@ -407,7 +407,8 @@ ul.skill li .progress div {
 .find .links .item span .hover-text {
   display: none;
 }
-.find .links .item:hover span .hover-text {
+.find .links .item:hover span .hover-text,
+.find .links .item:focus-within span .hover-text {
   display: inline;
 }
 .find .links .col-3 .item {
