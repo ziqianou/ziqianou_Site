@@ -4,13 +4,20 @@
 :root {
   --accent: #6cc4ff;
   --accent-2: #a78bfa;
-  --card-bg: rgba(255, 255, 255, 0.035);
-  --card-border: rgba(255, 255, 255, 0.08);
+  --card-bg: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.09),
+    rgba(255, 255, 255, 0.02)
+  );
+  --card-border: rgba(255, 255, 255, 0.12);
   --muted: rgba(255, 255, 255, 0.55);
   --bg: #212121;
   --bg-deep: #16181c;
   --fg: #e8eaed;
   --ease: cubic-bezier(0.19, 1, 0.22, 1);
+  --glass-shadow:
+    0 12px 40px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.14),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.08);
 }
 
 /* ==========================================================================
@@ -67,6 +74,17 @@ a:focus-visible {
   border-radius: 4px;
 }
 
+/* Fine film grain over the whole page */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
 .clear::after {
   content: "";
   display: block;
@@ -102,19 +120,40 @@ a:focus-visible {
 .background::after {
   content: "";
   position: absolute;
-  inset: 0;
+  inset: -20%;
   pointer-events: none;
   background:
     radial-gradient(
-      620px circle at 18% 62%,
-      rgba(108, 196, 255, 0.12),
+      closest-side at 28% 38%,
+      rgba(108, 196, 255, 0.28),
       transparent 70%
     ),
     radial-gradient(
-      520px circle at 82% 18%,
-      rgba(167, 139, 250, 0.1),
+      closest-side at 72% 62%,
+      rgba(167, 139, 250, 0.26),
+      transparent 70%
+    ),
+    radial-gradient(
+      closest-side at 55% 15%,
+      rgba(52, 211, 153, 0.12),
       transparent 70%
     );
+  filter: blur(36px);
+  mix-blend-mode: screen;
+  opacity: 0.9;
+  animation: aurora 26s ease-in-out infinite alternate;
+}
+
+@keyframes aurora {
+  0% {
+    transform: translate3d(-3%, -2%, 0) scale(1) rotate(0deg);
+  }
+  50% {
+    transform: translate3d(3%, 2%, 0) scale(1.08) rotate(6deg);
+  }
+  100% {
+    transform: translate3d(-2%, 3%, 0) scale(1.04) rotate(-5deg);
+  }
 }
 
 .background .cover {
@@ -194,6 +233,18 @@ a:focus-visible {
   position: absolute;
   bottom: 20%;
   left: 0;
+  padding: 30px 42px;
+  border-radius: 24px;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.08),
+    rgba(255, 255, 255, 0.015)
+  );
+  -webkit-backdrop-filter: blur(16px) saturate(140%);
+  backdrop-filter: blur(16px) saturate(140%);
+  box-shadow:
+    0 24px 60px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.16),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.08);
 }
 
 .hello h1,
@@ -257,6 +308,10 @@ a:focus-visible {
   margin-left: 40px;
   margin-right: 20px;
   border-radius: 100%;
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.16),
+    0 0 36px rgba(108, 196, 255, 0.22),
+    0 10px 30px rgba(0, 0, 0, 0.35);
 }
 
 .about ul.skill {
@@ -337,26 +392,49 @@ a:focus-visible {
   text-align: center;
   border-radius: 14px;
   background: var(--card-bg);
-  box-shadow: inset 0 0 0 1px var(--card-border);
-  opacity: 0.9;
+  box-shadow: var(--glass-shadow);
+  -webkit-backdrop-filter: blur(14px) saturate(140%);
+  backdrop-filter: blur(14px) saturate(140%);
+  opacity: 0.95;
   transition:
     transform 0.25s ease,
     box-shadow 0.25s ease,
-    background 0.25s ease;
+    background 0.25s ease,
+    opacity 0.25s ease;
 }
 
 .find .links .item:hover {
   opacity: 1;
   transform: translateY(-6px);
-  background: rgba(255, 255, 255, 0.06);
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.14),
+    rgba(255, 255, 255, 0.04)
+  );
   box-shadow:
-    inset 0 0 0 1px rgba(108, 196, 255, 0.35),
-    0 12px 30px rgba(0, 0, 0, 0.35);
+    0 18px 44px rgba(0, 0, 0, 0.42),
+    0 0 0 1px rgba(108, 196, 255, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.22);
 }
 
 .find .links .item .inner {
   position: relative;
   z-index: 5;
+}
+
+.find .links .item::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  background: linear-gradient(
+    120deg,
+    rgba(255, 255, 255, 0.14),
+    rgba(255, 255, 255, 0) 45%
+  );
+  opacity: 0.6;
 }
 
 .find .links .item .bg {
@@ -399,9 +477,13 @@ a:focus-visible {
   font-size: 12px;
   color: #fff;
   white-space: nowrap;
-  background-color: #2c2c2c;
+  background-color: rgba(28, 30, 36, 0.85);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
   border-radius: 4px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  box-shadow:
+    0 6px 20px rgba(0, 0, 0, 0.35),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.12);
   filter: none;
   -webkit-text-fill-color: #fff;
   transform: translateX(-50%);
@@ -422,7 +504,7 @@ a:focus-visible {
   margin-left: -5px;
   border-width: 5px;
   border-style: solid;
-  border-color: #2c2c2c transparent transparent transparent;
+  border-color: #1c1e24 transparent transparent transparent;
 }
 
 .find .links .item:hover span .hover-text,
