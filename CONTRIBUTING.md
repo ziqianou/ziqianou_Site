@@ -79,8 +79,10 @@ npx http-server
 ├── 404.html           # 404 错误页面
 ├── css/               # 样式文件
 │   └── page.css
-├── js/                # JavaScript 文件
-│   └── page.js
+├── js/                # JavaScript 模块
+│   ├── main.js        # 入口
+│   ├── starfield.js   # 星空背景
+│   └── slogan.js      # 一言加载
 ├── images/            # 图片资源
 ├── favicon.ico        # 网站图标
 ├── robots.txt         # 搜索引擎配置

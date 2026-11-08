@@ -2,6 +2,7 @@
   "name": "ziqianou-site",
   "version": "1.0.0",
   "description": "ziqianou的个人网站 - Personal website of ziqianou",
+  "type": "module",
   "main": "index.html",
   "scripts": {
     "start": "python -m http.server 8000",

@@ -10,7 +10,7 @@
 
 - HTML5
 - CSS3
-- JavaScript (原生)
+- JavaScript (原生 ES Modules)
 - GitHub Pages (部署)
 
 ## 项目结构
@@ -19,10 +19,12 @@
 .
 ├── index.html          # 主页面
 ├── 404.html           # 404 错误页面
-├── css/               # 样式文件目录
+├── css/
 │   └── page.css       # 主样式表
-├── js/                # JavaScript 文件目录
-│   └── page.js        # 主脚本文件
+├── js/
+│   ├── main.js        # 入口：初始化各模块
+│   ├── starfield.js   # 星空背景动画
+│   └── slogan.js      # 一言（hitokoto）加载
 ├── images/            # 图片资源目录
 │   ├── ziqianou.jpg   # 头像
 │   └── travel.png     # 开往图标
