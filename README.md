@@ -63,7 +63,7 @@ npx http-server
 
 本项目通过 GitHub Actions 自动部署到 GitHub Pages。每次推送到 `main` 分支时，网站会自动更新。
 
-访问地址：[https://ziqianou.github.io/ziqianou_Site/](https://ziqianou.github.io/ziqianou_Site/)
+访问地址：[https://ziqianou.top/](https://ziqianou.top/)
 
 ## 许可证
 

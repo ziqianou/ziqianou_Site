@@ -1868,28 +1868,35 @@ parcelRequire = (function (e, r, t, n) {
         function change_slogan() {
           const Http = new XMLHttpRequest();
           const url = "https://v1.hitokoto.cn/?c=i&encode=json";
-          Http.open("GET", url, false);
-          Http.send();
-          if (Http.status != 200) {
-            console.error("一言获取错误：" + Http.status);
-            zepto("#slogan").html("一言获取错误：" + Http.status);
-            return;
-          }
-          var json = JSON.parse(Http.responseText);
-          console.log("一言获取成功：" + Http.responseText);
-          if (!json.hitokoto) {
-            console.error("一言获取错误：返回数据错误");
-            zepto("#slogan").html("一言获取错误：返回数据错误");
-            return;
-          }
-          slogan = json.hitokoto;
-          if (json.from) {
-            slogan += "《" + json.from + "》";
-            if (json.from_who) {
-              slogan += json.from_who;
+          Http.open("GET", url, true);
+          Http.timeout = 5000;
+          Http.onreadystatechange = function () {
+            if (Http.readyState !== 4) return;
+            if (Http.status != 200) {
+              console.error("一言获取错误：" + Http.status);
+              return;
             }
-          }
-          zepto("#slogan").html(slogan);
+            var json;
+            try {
+              json = JSON.parse(Http.responseText);
+            } catch (e) {
+              console.error("一言获取错误：返回数据错误");
+              return;
+            }
+            if (!json.hitokoto) {
+              console.error("一言获取错误：返回数据错误");
+              return;
+            }
+            var slogan = json.hitokoto;
+            if (json.from) {
+              slogan += "《" + json.from + "》";
+              if (json.from_who) {
+                slogan += json.from_who;
+              }
+            }
+            zepto("#slogan").html(slogan);
+          };
+          Http.send();
           // var slogans = [
           //     "我这人吧，特别有耐心，等公交的时候都能睡着。",
           //     "我最近在研究历史，研究怎么把古代人变成现代人，结果研究出了一个会用手机的古人",
@@ -2053,4 +2060,3 @@ parcelRequire = (function (e, r, t, n) {
   ["Bb20"],
   null
 );
-//# sourceMappingURL=/page.3a0791a3.js.map
